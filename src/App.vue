@@ -20,37 +20,20 @@
       case 'divisao':
         return numeroA / numeroB
       default:
-        return numeroA + numeroB
+        return parseFloat(numeroA) + parseFloat(numeroB)
     }
   }
 </script>
 
 <template>
-  <Cabecalho/>
-  <Calculadora/>
   <div class="container">
-    <input
-    @keyup="evento => estado.numeroA = evento.target.value"
-    :value="estado.numeroA" type="number" placeholder="0"
-    >
-    <select
-    @change="evento => estado.operacao = evento.target.value"
-    >
-      <option value="adicao">+</option>
-      <option value="subtracao">-</option>
-      <option value="multiplicacao">x</option>
-      <option value="divisao">:</option>
-    </select>
-    <input
-    @keyup="evento => estado.numeroB = evento.target.value"
-    :value="estado.numeroB" type="number" placeholder="0"
-    >
-    = {{ getResultado() }}
+    <Cabecalho/>
+    <Calculadora
+    :trocar-operacao="evento => estado.operacao = evento.target.value"
+    :numero-a="estado.numeroA" :numero-b="estado.numeroB"
+    :get-numero-a="evento => estado.numeroA = evento.target.value"
+    :get-numero-b="evento => estado.numeroB = evento.target.value"
+    :get-resultado="getResultado"
+    />
   </div>
 </template>
-
-<style scoped>
-  input[type=number] {
-    appearance: textfield;
-  }
-</style>
